@@ -7,22 +7,17 @@ class Person {
     greeting () {
         return `Hello there ${this.firstname} ${this.lastname}`;
     }
+}
 
-    addingNumbers ( x, y ) {
-        return x + y;
-    }
+class Customer extends Person {
+    constructor(firstname, lastname, phone, membership) {
+        super(firstname, lastname);
 
-    printHello () {
-        return `Hello World`;
+        this.phone = phone;
+        this.membership = membership;
     }
 }
 
+const john = new Customer('john', 'Doe', '555-555-5555', 'Standard');
 
-
-const mary = new Person('Mary', 'williams');
-
-console.log(mary.greeting())
-
-console.log(mary.addingNumbers(1,2))
-
-console.log(mary.printHello())
+console.log(john.greeting())
