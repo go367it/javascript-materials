@@ -1,40 +1,32 @@
-// promise statement with javascript
-const posts = [
-    {title: 'PostOne', body:'this is post one'},
-    {title: 'Post two', body:'this is post two'}
-];
+// fetch api statements in javascript
+document.querySelector('#button1').addEventListener('click', getText);
 
-function createPost(post){
-    return new Promise(function(resolve, reject){
-        setTimeout(function(){
-            posts.push(post);
+document.querySelector('#button2').addEventListener('click', getJson);
 
-            let error = true
-
-            if(!error){
-                resolve()
-            }
-            else {
-                reject('Error: Something went wrong');
-            }
-            
-        }, 2000) 
-    })  
-    }
-
-
-function getPosts() {
-    setTimeout(function(){
-        let output = '';
-        posts.forEach(function(post){
-            output += `<li>${posts.title}</li>`
-        });
-        document.body.innerHTML = output;
-    }, 1000)
+// get local text file
+function getText(){
+    fetch('test.txt')
+        .then(function(res){
+            return res.text()
+        })
+        .then(function(data){
+            console.log(data)
+        })
+        .catch(function(res){
+            console.log(res)
+        })
 }
 
-createPost({title: 'Post three', body:'This is post three'})
-.then(getPosts)
-.catch(function(err){
-    console.log(err);
-})
+// get local Json file
+function getJson(){
+    fetch('posts.json')
+        .then(function(res){
+            return res.json()
+        })
+        .then(function(data){
+            console.log(data)
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+}
