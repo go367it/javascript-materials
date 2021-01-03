@@ -1,15 +1,27 @@
-// callbacks with javascript
+// promise statement with javascript
 const posts = [
     {title: 'PostOne', body:'this is post one'},
     {title: 'Post two', body:'this is post two'}
 ];
 
-function createPost(post, callback){
-    setTimeout(function(){
-        posts.push(post);
-        callback()
-    }, 2000)
-}
+function createPost(post){
+    return new Promise(function(resolve, reject){
+        setTimeout(function(){
+            posts.push(post);
+
+            let error = true
+
+            if(!error){
+                resolve()
+            }
+            else {
+                reject('Error: Something went wrong');
+            }
+            
+        }, 2000) 
+    })  
+    }
+
 
 function getPosts() {
     setTimeout(function(){
@@ -21,4 +33,8 @@ function getPosts() {
     }, 1000)
 }
 
-createPost({title: 'Post three', body:'This is post three'}, getPosts)
+createPost({title: 'Post three', body:'This is post three'})
+.then(getPosts)
+.catch(function(err){
+    console.log(err);
+})
